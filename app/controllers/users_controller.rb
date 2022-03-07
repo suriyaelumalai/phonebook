@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :load_user, only: %i[show update]
+  TONES = ['humorous', 'ironic', 'cynical']
   def index
     render status: 200, json: User.all
   end
@@ -23,6 +24,10 @@ class UsersController < ApplicationController
     else
       render status: 422, json: { errors: user.errors }
     end
+  end
+
+  def tone
+    render status: 200, json: {tone: TONES[rand(3)]}
   end
 
   private
